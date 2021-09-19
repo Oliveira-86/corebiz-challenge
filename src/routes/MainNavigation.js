@@ -1,13 +1,28 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen, {
+    screenOptions as HomeScreenOptions
+} from '../screens/HomeScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
+export const BottomTabNav = () => {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="HomeTab" component={StackNavigation} />
+      <Tab.Screen name="Favorite" component={FavoritesScreen} />
+    </Tab.Navigator>
+  );
+}
+
 const StackNavigator = createStackNavigator();
 
-export const Navigator = () => {
+export const StackNavigation = () => {
     return (
         <StackNavigator.Navigator>
             <StackNavigator.Screen
@@ -17,10 +32,6 @@ export const Navigator = () => {
             <StackNavigator.Screen
                 name="Details"
                 component={DetailsScreen}
-            />
-            <StackNavigator.Screen
-                name="Favorite"
-                component={FavoritesScreen}
             />
         </StackNavigator.Navigator>
     )

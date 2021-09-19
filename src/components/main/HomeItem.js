@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     item: {
         width: width * 0.42,
         margin: 10,
-        backgroundColor: "rgba(0,0,0, 0.2)",
+        backgroundColor: "rgba(250,250,250, 0.08)",
         padding: 10,
         justifyContent: 'center',
         borderRadius: 5

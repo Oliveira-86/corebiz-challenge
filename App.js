@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 
-import { BottomTabNav } from './src/routes/MainNavigation';
+import { StackNavigation } from './src/routes/MainNavigation';
 import AppLoading from 'expo-app-loading'
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -34,7 +34,7 @@ export default function App() {
 
     <NavigationContainer>
       <Provider store={store}>
-        <BottomTabNav />
+        <StackNavigation />
         <StatusBar style="auto" />
       </Provider>
     </NavigationContainer>

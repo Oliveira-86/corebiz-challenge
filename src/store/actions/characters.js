@@ -46,7 +46,7 @@ export const fetchCharacters = () => {
                         images = "https://static.wikia.nocookie.net/starwars/images/0/00/BiggsHS-ANH.png/revision/latest?cb=20130305010406"
                         break;
                     case 'Obi-Wan Kenobi':
-                        images = " https://hqrock.files.wordpress.com/2019/08/obi-wan-lightsaber.jpg"
+                        images = "https://hqrock.files.wordpress.com/2019/08/obi-wan-lightsaber.jpg"
                         break;
                     default:
                 }

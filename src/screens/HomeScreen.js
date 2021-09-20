@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { FlatList, StyleSheet, Text, View, Dimensions, ImageBackground } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Dimensions, Image, ActivityIndicator } from 'react-native';
 import images from '../assets/images';
 import HomeItem from '../components/main/HomeItem';
+
+import Logo from '../assets/star-wars-logo.png';
 
 import { useSelector, useDispatch } from 'react-redux';
 import * as charactersActions from '../store/actions/characters';
 import Colors from '../styles/Colors';
+import Fonts from '../styles/Fonts';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -13,9 +16,9 @@ const bgImage = images.homeBg;
 
 const HomeScreen = (props) => {
     const [error, setError] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     const characters = useSelector(state => state.characters.availableCharacters);
-    const favoriteCharacters = useSelector(state => state.characters.favoriteCharacter);
 
     const dispatch = useDispatch();
 
@@ -31,11 +34,19 @@ const HomeScreen = (props) => {
     )
 
     useEffect(() => {
-        loadCharacters();
+        setIsLoading(true);
+        loadCharacters().then(() => {
+            setIsLoading(false);
+        });
     }, []);
 
-    
-    
+    if (isLoading) {
+        return (
+            <View style={styles.centered}>
+                <ActivityIndicator size="large" color={Colors.primary} />
+            </View>
+        )
+    };
 
     if (error) {
         return (
@@ -54,9 +65,11 @@ const HomeScreen = (props) => {
         return (
             <HomeItem
                 name={itemData.item.name}
+                imageUrl={itemData.item.image}
                 onSelected={() => {
                     props.navigation.navigate('Details', {
-                        characterId: itemData.item.created
+                        characterId: itemData.item.created,
+                        name: itemData.item.name
                     })
                 }}
             />
@@ -65,29 +78,29 @@ const HomeScreen = (props) => {
 
 
     return (
-        <ImageBackground
-            source={{ uri: bgImage }}
-            style={{ width, height }}
-        >
-            <View style={styles.container}>
-                <FlatList
-                    numColumns={2}
-                    data={characters}
-                    renderItem={renderGridItem}
-                    keyExtractor={(item) => item.height}
-                />
-            </View>
-        </ImageBackground>
+        <View style={styles.container}>
+            <FlatList
+                numColumns={2}
+                data={characters}
+                renderItem={renderGridItem}
+                keyExtractor={(item) => item.height}
+                ListHeaderComponent={() => (
+                    <View style={[{ paddingHorizontal: 10, paddingTop: 40 }]}>
+                        <Image
+                            style={styles.logo}
+                            source={Logo}
+                        />
+                        <Text style={styles.title}>
+                            Characters
+                        </Text>
+                    </View>
+                )}
+            />
+        </View>
     );
 };
 
 export default HomeScreen;
-
-// export const screenOptions = () => {
-//     return {
-
-//     }
-// };
 
 const styles = StyleSheet.create({
     container: {
@@ -95,7 +108,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
-        padding: 20,
-        backgroundColor: 'rgba(0,0,0, 0.8)'
+        padding: 10,
+        backgroundColor: Colors.black
+    },
+
+    title: {
+        fontFamily: Fonts.bold,
+        fontSize: 24,
+        color: 'white',
+        marginTop: 20
+    },
+
+    logo: {
+        width: 150,
+        height: 70
+    },
+
+    centered: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.black
     },
 });

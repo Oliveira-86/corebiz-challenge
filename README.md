@@ -12,10 +12,8 @@
 
 
 <div alignItem="end">
-  <img width="225" height="350" src="src/assets/toReadme/sw - 1.gif">
-  
-  <img width="225" height="350" src="src/assets/toReadme/sw - 2.gif">
-  
+  <img width="225" height="350" src="src/assets/toReadme/sw - 1.gif"> 
+  <img width="225" height="350" src="src/assets/toReadme/sw - 2.gif"> 
   <img width="225" height="350" src="src/assets/toReadme/sw - 3.gif">
   <img width="225" height="350" src="src/assets/toReadme/sw - 4.gif">
  </div> 
@@ -27,7 +25,8 @@
 ##### - React-Navigation V6
 ##### - React-Redux
 ##### - Redux-Thunk
-##### - Expo Go
+##### - Axios
+##### - Expo 
 
 ## How it works
 

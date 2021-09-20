@@ -1,5 +1,5 @@
 class Characters {
-    constructor(created, name, height, gender, hair_color, skin_color, eye_color, birth_year, image) {
+    constructor(created, name, height, gender, hair_color, skin_color, eye_color, birth_year, image, color) {
         this.created = created;
         this.name = name;
         this.height = height;
@@ -9,6 +9,7 @@ class Characters {
         this.eye_color = eye_color;
         this.birth_year= birth_year;
         this.image = image;
+        this.color = color
     }
 }
 

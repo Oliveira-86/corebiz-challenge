@@ -5,6 +5,8 @@ import InfoDetailsItem from '../components/main/InfoDetailsItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
 
+import { LinearGradient } from 'expo-linear-gradient';
+
 import Fonts from '../styles/Fonts';
 import Colors from '../styles/Colors';
 import { toggleFavorite } from '../store/actions/characters';
@@ -39,36 +41,45 @@ const DetailsScreen = (props) => {
     };
 
     return (
-        <View style={styles.container}>
-            <Image
-                source={{ uri: characterSelected.image }}
-                style={styles.image}
-            />
-            <View style={{ flex: 1, left: -50 }}>
-                <InfoDetailsItem
-                    dataLeft={characterSelected.gender}
-                    labelLeft="gender"
-                    dataRight={characterSelected.birth_year}
-                    labelRight="birth year"
-                />
-                <InfoDetailsItem
-                    dataLeft={characterSelected.height}
-                    labelLeft="height"
-                    dataRight={characterSelected.mass}
-                    labelRight="mass"
-                />
-            </View>
-            <View style={styles.favIcon}>
-                <Entypo.Button
-                    {...props}
-                    name={isFavorite ? 'heart' : 'heart-outlined'}
-                    size={40}
-                    backgroundColor='transparent'
-                    color={isFavorite ? Colors.primary : Colors.primary}
-                    onPress={toggleFavoriteHandler}
 
+        <View style={styles.container}>
+            <LinearGradient
+                colors={[Colors.black, characterSelected.color]}
+                style={styles.gradient}
+                start={{ x: 0.9, y: 0.5 }}
+                end={{ x: -1.2, y: -1.2 }}
+            >
+                <Image
+                    source={{ uri: characterSelected.image }}
+                    style={styles.image}
                 />
-            </View>
+                <View style={{ flex: 1, left: -50 }}>
+                    <InfoDetailsItem
+                        dataLeft={characterSelected.gender}
+                        labelLeft="gender"
+                        dataRight={characterSelected.birth_year}
+                        labelRight="birth year"
+                    />
+                    <InfoDetailsItem
+                        dataLeft={characterSelected.height}
+                        labelLeft="height"
+                        dataRight={characterSelected.mass}
+                        labelRight="mass"
+                    />
+                </View>
+                <View style={styles.favIcon}>
+                    <Entypo.Button
+                        {...props}
+                        name={isFavorite ? 'heart' : 'heart-outlined'}
+                        size={40}
+                        backgroundColor='transparent'
+                        color={isFavorite ? Colors.primary : Colors.primary}
+                        onPress={toggleFavoriteHandler}
+
+                    />
+                </View>
+
+            </LinearGradient>
         </View>
     );
 };
@@ -76,9 +87,7 @@ const DetailsScreen = (props) => {
 export const screenOptions = (navData) => {
     return {
         title: navData.route.params.name,
-        headerStyle: {
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        },
+        headerTransparent: true,
         headerTitleStyle: {
             color: 'white',
             fontFamily: Fonts.bold
@@ -103,11 +112,14 @@ export default DetailsScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+
+    gradient: {
+        flex: 1,
         backgroundColor: 'white',
         padding: 10,
         backgroundColor: Colors.black,
         alignItems: 'center',
-
     },
 
     text: {
@@ -127,11 +139,12 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         marginVertical: 20,
+        marginTop: 120
     },
 
     favIcon: {
         position: 'absolute',
-        top: 255,
+        top: 355,
         right: 40
     },
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
-import HomeItem from '../components/main/HomeItem';
+import FavItem from '../components/main/FavItem';
 import Colors from '../styles/Colors';
 import Fonts from '../styles/Fonts';
 
@@ -21,33 +21,33 @@ const FavoritesScreen = () => {
 
     const renderGridItem = (itemData) => {
         return (
-            <HomeItem
+            <FavItem
                 name={itemData.item.name}
                 imageUrl={itemData.item.image}
                 gender={itemData.item.gender}
-                subtitle={true}
             />
         );
     };
 
     return (
+
         <View style={styles.content}>
-            <FlatList
-                data={favCharacters}
-                keyExtractor={(item) => item.created}
-                renderItem={renderGridItem}
-                ListHeaderComponent={() => (
-                    <View style={styles.headerContainer}>
-                        <Image
-                            source={{ uri: 'https://github.com/Oliveira-86.png' }}
-                            style={{ width: 50, height: 50, borderRadius: 25 }}
-                        />
-                        <Text style={styles.title}>
-                            Yours Favorites
-                        </Text>
-                    </View>
-                )}
-            />
+                <FlatList
+                    data={favCharacters}
+                    keyExtractor={(item) => item.created}
+                    renderItem={renderGridItem}
+                    ListHeaderComponent={() => (
+                        <View style={styles.headerContainer}>
+                            <Image
+                                source={{ uri: 'https://github.com/Oliveira-86.png' }}
+                                style={{ width: 50, height: 50, borderRadius: 25 }}
+                            />
+                            <Text style={styles.title}>
+                                Yours Favorites
+                            </Text>
+                        </View>
+                    )}
+                />
         </View>
     );
 };
@@ -74,6 +74,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 10,
-        marginVertical: 10
-    }
+        marginVertical: 20
+    },
+
+    background: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        height: 300,
+    },
 });
